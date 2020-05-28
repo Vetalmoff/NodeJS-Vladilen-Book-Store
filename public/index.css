@@ -1,0 +1,33 @@
+.nav-wrapper {
+    padding: 0 2rem;
+}
+
+.price {
+    font-size: 2rem;
+}
+
+.book {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.book h1 {
+    margin-bottom: 2rem;
+}
+
+.book img {
+    max-width: 600px;
+    height: auto;
+}
+
+.book .price.big {
+    font-size: 3rem;
+}
+
+.card-action.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

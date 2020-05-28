@@ -1,0 +1,31 @@
+<h1>Card</h1>
+
+{{#if books.length}}
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>quantity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {{#each books}}
+            <tr>
+                <td>{{title}}</td>
+                <td>{{count}}</td>
+                <td>
+                    <button class="btn btn-small">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <p><strong>Price</strong><span class="price">{{price}}</span></p>
+{{else}}
+    <p>Card is empty</p>
+{{/if}}

@@ -1,0 +1,27 @@
+<h1>Edit {{book.title}}</h1>
+
+<form action="/books/edit" method="POST">
+    <div class="input-field">
+        <input id="title" name="title" type="text" class="validate" required value="{{book.title}}">
+        <label for="title">Title</label>
+        <span class="helper-text" data-error="Input name" data-success="right"></span>
+    </div>
+
+    <div class="input-field col s6">
+        <input id="price" name="price" type="number" class="validate" required min="1" value="{{book.price}}">
+        <label for="price">Price</label>
+        <span class="helper-text" data-error="Input price" data-success="right"></span>
+    </div>
+
+    <div class="input-field col s6">
+        <input id="img" name="img" type="text" class="validate" required value="{{book.img}}">
+        <label for="img">Image url</label>
+        <span class="helper-text" data-error="Input img  url" data-success="right"></span>
+    </div>
+
+    <input type="hidden" name="id" value="{{book.id}}">
+
+    <button class="btn btn-primary">Save</button>
+
+    
+</form>
