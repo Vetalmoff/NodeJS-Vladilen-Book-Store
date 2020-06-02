@@ -35,6 +35,17 @@ class Book {
 
     }
 
+    static async search(searchParams) {
+        const books = await Book.getAll()
+        const searchBooks = books.filter(b => b.title.toLowerCase().match(searchParams.toLowerCase()))
+
+        if (searchBooks) {
+            return searchBooks
+        } else {
+            return []
+        }
+    }
+
     static async update(book) {
         const books = await Book.getAll()
 
@@ -53,6 +64,73 @@ class Book {
 
     }
 
+
+    static async pagination(query) {
+        const books = await this.getAll()
+        const page = +query.page
+        const limit = 4
+        const result = {}
+        const startIndex = (page - 1) * limit
+        const endIndex = page * limit
+
+        books.sort((a, b) => a.price - b.price)
+        
+        result.books = books.slice(startIndex, endIndex)
+
+        if (endIndex < books.length)
+        result.next = {
+            page: page + 1
+        }
+
+        if (startIndex > 0)
+        result.previous = {
+            page: page - 1
+        }
+
+        result.first = {
+            page: 1
+        }
+
+        if (books.length % limit === 0) {
+            result.last = {
+                page: Math.floor(books.length / limit)
+                }
+        } else {
+            result.last = {
+                page: Math.floor(books.length / limit) + 1
+            }
+        }
+        
+
+        result.page = page
+
+        switch (query.view) {
+            case 's': result.view = {
+                alias: 's',
+                body: 'col s12 m6 l4 xl3'
+            }
+                break
+            case 'm': result.view = {
+                alias: 'm',
+                body: 'col s12 m4 l3 xl2'
+            }
+                break
+            case 'l': result.view = {
+                alias: 'l',
+                body: 'col s12 m3 l2 xl1'
+            }
+                break
+            default: 
+                break
+        }
+
+        
+
+        return result
+    }
+
+
+    
 
 
     static getAll() {

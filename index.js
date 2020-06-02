@@ -6,6 +6,7 @@ const homeRoutes = require('./routes/home.js')
 const addRoutes = require('./routes/add')
 const booksRoutes = require('./routes/books')
 const cardRoutes = require('./routes/card')
+const searchRoutes = require('./routes/search')
 
 
 const app = express()
@@ -20,12 +21,13 @@ app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')
 app.set('views', 'views')
 
-app.use(express.static('public'))
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({extended: true}))
 app.use('/', homeRoutes)
 app.use('/add', addRoutes)
 app.use('/books', booksRoutes)
 app.use('/card', cardRoutes)
+app.use('/search', searchRoutes)
 
 
 

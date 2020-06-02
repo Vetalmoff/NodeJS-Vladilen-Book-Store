@@ -4,13 +4,22 @@ const router = Router()
 
 
 
-router.get('/', async (req, res) => {
-    const books = await Book.getAll()
-    res.render('books', {
-        title: 'Books',
-        isBooks: true,
-        books
-    })
+router.get('/' ,async (req, res) => {
+    //const books = await Book.getAll()
+    const booksObj = await Book.pagination(req.query)
+    console.log(req.query)
+    console.log(booksObj)
+    if (req.query.xhttp) {
+        res.status(200).json(booksObj)
+    } else {
+        res.render('books', {
+            title: 'Books',
+            isBooks: true,
+            view: booksObj.view.body,
+            booksObj
+        })
+    }
+    
 })
 
 router.get('/:id/edit', async (req, res) => {
@@ -32,6 +41,8 @@ router.post('/edit', async (req, res) => {
 })
 
 router.get('/:id', async (req, res) => {
+    console.log(req.query)
+    console.log(req.params)
     const book = await Book.getById(req.params.id) 
     res.render('book', {
         layout: 'empty',

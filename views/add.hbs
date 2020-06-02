@@ -2,7 +2,7 @@
 
 <form action="/add" method="POST">
     <div class="input-field">
-        <input id="title" name="title" type="text" class="validate" required>
+        <input id="title" name="title" type="text" class="validate" required min="10" max="100">
         <label for="title">Title</label>
         <span class="helper-text" data-error="Input name" data-success="right"></span>
     </div>

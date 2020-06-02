@@ -31,3 +31,15 @@
     justify-content: space-between;
     align-items: center;
 }
+
+#search {
+    margin: 1rem;
+}
+
+/* .card{
+    height: 100vh;
+} */
+
+#but {
+    padding: 1rem;
+}

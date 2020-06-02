@@ -1,10 +1,14 @@
+<button class="btn" id="two"><i class="material-icons">view_stream</i></button>
+<button class="btn" id="three"><i class="material-icons">view_module</i></button>
+<button class="btn" id="four"><i class="material-icons">view_comfy</i></button>
+
+
 <h1>Books :</h1>
 
-
-{{#if books.length}}
-    {{#each books}}
-        <div class="row">
-            <div class="col s6">
+{{#if booksObj.books.length}}
+    <div class="row">
+    {{#each booksObj.books}}
+            <div class='{{../view}}'>
             <div class="card">
                 <div class="card-image">
                 <img src="{{img}}" alt="{{title}}">
@@ -23,8 +27,45 @@
                 </div>
             </div>
             </div>
-        </div>
     {{/each}}
+    </div>
+    <div class="row">
+        <div class="col s7">
+            <ul class="pagination">
+                    <li class="waves-effect"><a href="/books?page={{booksObj.first.page}}&view={{booksObj.view.alias}}">first page</a></li>
+                    
+                    {{#if booksObj.previous}}
+                        <li class="waves-effect"><a href="/books?page={{booksObj.previous.page}}&view={{booksObj.view.alias}}"><i class="material-icons">chevron_left</i></a></li>
+                    {{else}}
+                        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                    {{/if}}
+
+                    <li class="active"><a href="#!">{{booksObj.page}}</a></li>
+
+                    {{#if booksObj.next}}
+                        <li class="waves-effect"><a href="/books?page={{booksObj.next.page}}&view={{booksObj.view.alias}}"><i class="material-icons">chevron_right</i></a></li>
+                    {{else}}
+                        <li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                    {{/if}}
+                        
+                    <li class="waves-effect"><a href="/books?page={{booksObj.last.page}}&view={{booksObj.view.alias}}" data-page="{{booksObj.last.page}}" id="lastPage">last page :  {{booksObj.last.page}}</a></li>
+            </ul>
+        </div>
+        <div class="col s5">
+            <form action="#!">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="page" type="number" class="validate" min="1" max="{{booksObj.last.page}}" required>
+                        <label for="page"><span id="searchSpan">Choose page</span></label>
+                    </div>
+                    <div id="but">
+                        <button id="goSearch" type="submit" class="col s2 btn red lighten-2">Go</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+  </div>
 {{else}}
     <p>There are no books</p>
 {{/if}}
