@@ -5,10 +5,10 @@
 
 <h1>Books :</h1>
 
-{{#if booksObj.books.length}}
+{{#if booksObj.length}}
     <div class="row">
-    {{#each booksObj.books}}
-            <div class='{{../view}}'>
+    {{#each booksObj}}
+            <div class='col s12 m6 l4 xl3'>
             <div class="card">
                 <div class="card-image">
                 <img src="{{img}}" alt="{{title}}">
@@ -20,7 +20,7 @@
                 <div class="card-action actions">
                 <a href="/books/{{id}}" target="_blank">Open book</a>
                 <a href="/books/{{id}}/edit?allow=true" >Edit</a>
-                <form action="/card/add" method="POST">
+                <form action="/cart/add" method="POST">
                     <input type="hidden" name="id" value="{{id}}">
                     <button type="submit" class="btn btn-primary">Buy</button>
                 </form>

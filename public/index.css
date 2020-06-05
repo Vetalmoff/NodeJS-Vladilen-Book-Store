@@ -36,10 +36,11 @@
     margin: 1rem;
 }
 
-/* .card{
-    height: 100vh;
-} */
 
 #but {
     padding: 1rem;
+}
+
+.book-form{
+    margin-bottom: 2rem;
 }
