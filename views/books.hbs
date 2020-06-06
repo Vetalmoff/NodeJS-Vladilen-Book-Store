@@ -1,31 +1,50 @@
-<button class="btn" id="two"><i class="material-icons">view_stream</i></button>
-<button class="btn" id="three"><i class="material-icons">view_module</i></button>
-<button class="btn" id="four"><i class="material-icons">view_comfy</i></button>
-
-
 <h1>Books :</h1>
+
+<div class="row">
+    <div class="col s12">
+      <div class="row">
+          <div class="input-field col s3">
+            <i class="material-icons prefix">search</i>
+            <input type="text" id="autocomplete-input" class="autocomplete">
+            <label for="autocomplete-input">Search</label>
+          </div>
+          <div class="col s2">
+            <button id="search" class="btn btn-primary">Search</button>
+          </div>
+          <div class="col s4 offset-s3 view-buttons">
+                <button class="btn" id="two"><i class="material-icons">view_stream</i></button>
+                <button class="btn" id="three"><i class="material-icons">view_module</i></button>
+                <button class="btn" id="four"><i class="material-icons">view_comfy</i></button>
+          </div>
+      </div>
+    </div>
+</div>
+
+
 
 {{#if booksObj.length}}
     <div class="row">
     {{#each booksObj}}
-            <div class='col s12 m6 l4 xl3'>
-            <div class="card">
-                <div class="card-image">
-                <img src="{{img}}" alt="{{title}}">
+            <div class="col s12 m6 l4 xl3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="{{img}}" alt="{{title}}">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title">{{title}}</span>
+                        <p class="price">{{price}}</p>
+                    </div>
+                    <div class="card-action actions">
+                        <a href="/books/{{id}}" target="_blank">Open book</a>
+                        {{#if @root.isAuth}}
+                        <a href="/books/{{id}}/edit?allow=true" >Edit</a>
+                        <form action="/cart/add" method="POST">
+                            <input type="hidden" name="id" value="{{id}}">
+                            <button type="submit" class="btn btn-primary">Buy</button>
+                        </form>
+                        {{/if}}
+                    </div>
                 </div>
-                <div class="card-content">
-                <span class="card-title">{{title}}</span>
-                <p class="price">{{price}}</p>
-                </div>
-                <div class="card-action actions">
-                <a href="/books/{{id}}" target="_blank">Open book</a>
-                <a href="/books/{{id}}/edit?allow=true" >Edit</a>
-                <form action="/cart/add" method="POST">
-                    <input type="hidden" name="id" value="{{id}}">
-                    <button type="submit" class="btn btn-primary">Buy</button>
-                </form>
-                </div>
-            </div>
             </div>
     {{/each}}
     </div>

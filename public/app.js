@@ -70,44 +70,45 @@ const $searchButton = document.querySelector('#search')
 const $searchInput = document.querySelector('#autocomplete-input')
 const $container = document.querySelector('.container')
 
-$searchButton.addEventListener('click', (event) => {
-    const searchValue = $searchInput.value
 
-    fetch(`/search?word=${searchValue}`, {
-        method: 'get'
-    }).then(res => res.json())
-    .then(books => {
-        if (books.length) {
-            const html = books.map(b => `
-            <div class="row">
-            <div class=" cards col s6">
-            <div class="card">
-                <div class="card-image">
-                <img src="${b.img}" alt="${b.title}">
-                </div>
-                <div class="card-content">
-                <span class="card-title">${b.title}</span>
-                <p class="price">${toCurrency(b.price)}</p>
-                </div>
-                <div class="card-action actions">
-                <a href="/books/${b.id}" target="_blank">Open book</a>
-                <a href="/books/${b.id}/edit?allow=true" >Edit</a>
-                <form action="/card/add" method="POST">
-                    <input type="hidden" name="id" value="${b.id}">
-                    <button type="submit" class="btn btn-primary">Buy</button>
-                </form>
-                </div>
-            </div>
-            </div>
-        </div>
-            `).join('')
-            $container.innerHTML = `<h1>We find this books :</h1>
-            ${html}`
-        } else {
-            $container.innerHTML = '<p>There are no books with this parameters</p>'
-        }
-    })
-})
+// $searchButton.addEventListener('click', (event) => {
+//     const searchValue = $searchInput.value
+
+//     fetch(`/search?word=${searchValue}`, {
+//         method: 'get'
+//     }).then(res => res.json())
+//     .then(books => {
+//         if (books.length) {
+//             const html = books.map(b => `
+//             <div class="row">
+//             <div class=" cards col s6">
+//             <div class="card">
+//                 <div class="card-image">
+//                 <img src="${b.img}" alt="${b.title}">
+//                 </div>
+//                 <div class="card-content">
+//                 <span class="card-title">${b.title}</span>
+//                 <p class="price">${toCurrency(b.price)}</p>
+//                 </div>
+//                 <div class="card-action actions">
+//                 <a href="/books/${b.id}" target="_blank">Open book</a>
+//                 <a href="/books/${b.id}/edit?allow=true" >Edit</a>
+//                 <form action="/card/add" method="POST">
+//                     <input type="hidden" name="id" value="${b.id}">
+//                     <button type="submit" class="btn btn-primary">Buy</button>
+//                 </form>
+//                 </div>
+//             </div>
+//             </div>
+//         </div>
+//             `).join('')
+//             $container.innerHTML = `<h1>We find this books :</h1>
+//             ${html}`
+//         } else {
+//             $container.innerHTML = '<p>There are no books with this parameters</p>'
+//         }
+//     })
+// })
 
 // const $pageVal = document.querySelector('#page')
 // const $go = document.querySelector('#goSearch')
@@ -189,3 +190,4 @@ $searchButton.addEventListener('click', (event) => {
 //     page: +$pageVal.value
 // }
 
+M.Tabs.init(document.querySelectorAll('.tabs'))

@@ -15,25 +15,37 @@
                 <li><a href="/books?page=1&view=s">Books</a></li>
             {{/if}}
 
-            {{#if isAdd}}
-                <li class="active"><a href="/add">Add book</a></li>
-            {{else}}
-                <li><a href="/add">Add book</a></li>
-            {{/if}}
+            {{#if isAuth}}
 
-            {{#if isCard}}
-                <li class="active"><a href="/cart">Cart</a></li>
-            {{else}}
-                <li><a href="/cart">Cart</a></li>
-            {{/if}}
+                {{#if isAdd}}
+                    <li class="active"><a href="/add">Add book</a></li>
+                {{else}}
+                    <li><a href="/add">Add book</a></li>
+                {{/if}}
 
-            {{#if isOrder}}
-                <li class="active"><a href="/orders">Orders</a></li>
+                {{#if isCard}}
+                    <li class="active"><a href="/cart">Cart</a></li>
+                {{else}}
+                    <li><a href="/cart">Cart</a></li>
+                {{/if}}
+
+                {{#if isOrder}}
+                    <li class="active"><a href="/orders">Orders</a></li>
+                {{else}}
+                    <li><a href="/orders">Orders</a></li>
+                {{/if}}
+
+                <li><a href="/auth/logout">Logout</a></li>
+
             {{else}}
-                <li><a href="/orders">Orders</a></li>
-            {{/if}}
+
+                {{#if isLogin}}
+                    <li class="active"><a href="/auth/login#login">Login</a></li>
+                {{else}}
+                    <li><a href="/auth/login#login">Login</a></li>
+                {{/if}}
+            {{/if}}            
       </ul>
-      
     </div>
   </nav>
 </div>
