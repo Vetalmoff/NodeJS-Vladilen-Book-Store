@@ -34,7 +34,8 @@ router.get('/', auth, async (req, res) => {
     const books = mapCartItems(user.cart)
     //console.log(user.cart.items)
     //console.log(req.user.cart.items)
-    console.log(books)
+    //console.log(books)
+    //console.log('Csrf from cart res.locsls = ' ,res.locals.csrf)
 
 
     res.render('cart', {

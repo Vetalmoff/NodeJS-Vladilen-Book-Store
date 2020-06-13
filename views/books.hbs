@@ -1,26 +1,28 @@
-<h1>Books :</h1>
+
 
 <div class="row">
     <div class="col s12">
       <div class="row">
-          <div class="input-field col s3">
+          <div class="input-field col s12 m6 l4 xl3">
             <i class="material-icons prefix">search</i>
             <input type="text" id="autocomplete-input" class="autocomplete">
             <label for="autocomplete-input">Search</label>
           </div>
-          <div class="col s2">
-            <button id="search" class="btn btn-primary">Search</button>
+          <div class="col s12 m6 l4 xl3">
+            <button id="search" class="btn red lighten-2">Search</button>
           </div>
-          <div class="col s4 offset-s3 view-buttons">
-                <button class="btn" id="two"><i class="material-icons">view_stream</i></button>
-                <button class="btn" id="three"><i class="material-icons">view_module</i></button>
-                <button class="btn" id="four"><i class="material-icons">view_comfy</i></button>
+          <div class="col s12 m12 l12 xl3">
+              <div class="view-buttons" >
+                <button class="btn red lighten-2" id="two"><i class="material-icons">view_stream</i></button>
+                <button class="btn red lighten-2" id="three"><i class="material-icons">view_module</i></button>
+                <button class="btn red lighten-2" id="four"><i class="material-icons">view_comfy</i></button>
+              </div>
           </div>
       </div>
     </div>
 </div>
 
-
+<h1>Books :</h1>
 
 {{#if booksObj.length}}
     <div class="row">
@@ -31,7 +33,7 @@
                         <img src="{{img}}" alt="{{title}}">
                     </div>
                     <div class="card-content">
-                        <span class="card-title">{{title}}</span>
+                            <div class="card-title">{{title}}</div>
                         <p class="price">{{price}}</p>
                     </div>
                     <div class="card-action actions">
@@ -41,6 +43,7 @@
                         <form action="/cart/add" method="POST">
                             <input type="hidden" name="id" value="{{id}}">
                             <button type="submit" class="btn btn-primary">Buy</button>
+                            <input type="hidden" name="_csrf" value="{{../csrf}}">
                         </form>
                         {{/if}}
                     </div>

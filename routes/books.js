@@ -8,7 +8,7 @@ const auth = require('../middleware/auth')
 
 router.get('/' ,async (req, res) => {
     const booksObj = await Book.find()
-    console.log(booksObj)
+    //console.log(booksObj)
     const cardTitle = booksObj.map(b => {
         if (b.title.length > 20) {
             return b.title = b.title.slice(0, 15) + '...'

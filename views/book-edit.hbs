@@ -21,11 +21,14 @@
 
     <input type="hidden" name="id" value="{{book.id}}">
 
+    <input type="hidden" name="_csrf" value="{{csrf}}">
+
     <button type="submit" class="btn btn-primary">Save</button>
     
 </form>
 
 <form action="/books/remove" method="POST">
-<input type="hidden" name="id" value="{{book.id}}">
-<button type="submit" class="btn red">Remove book</button>
+    <input type="hidden" name="id" value="{{book.id}}">
+    <input type="hidden" name="_csrf" value="{{csrf}}">
+    <button type="submit" class="btn red">Remove book</button>
 </form>

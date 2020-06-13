@@ -46,9 +46,13 @@
 }
 
 .card-image {
-height: 400px;
-position: relative;
-overflow: hidden;
+    height: 400px;
+    position: relative;
+}
+
+.card-title {
+    height: 32px;
+    overflow: hidden;
 }
 
 .card-image img {
@@ -66,5 +70,14 @@ overflow: hidden;
 }
 
 .view-buttons {
-    margin-top: 1rem;
+    margin: 1rem;
+}
+
+.alert {
+    padding: 0.5 rem 1rem;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 1rem;
+    background-color: rgba(255, 0, 0, 0.3);
+    color: red;
 }

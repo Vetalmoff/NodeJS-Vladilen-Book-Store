@@ -7,6 +7,9 @@
         </ul>
         </div>
         <div id="login" class="col s6 offset-s3">
+            {{#if loginError}}
+                <p class="alert">{{loginError}}</p>
+            {{/if}}
             <h3>Enter the store</h3>
             <form action="/auth/login" method="POST">
                 <div class="input-field">
@@ -20,18 +23,29 @@
                     <label for="password">Password</label>
                     <span class="helper-text" data-error="Input password"></span>
                 </div>
+
+                <input type="hidden" name="_csrf" value="{{csrf}}">
                
                 <button class="btn btn-primary" type="submit">Login</button>  
             </form>
         </div>
 
         <div id="register" class="col s6 offset-s3">
+            {{#if regError}}
+                <p class="alert">{{regError}}</p>
+            {{/if}}
             <h3>Create new account</h3>
             <form action="/auth/register" method="POST">
                 <div class="input-field">
                     <input id="remail" name="email" type="email" class="validate" required>
                     <label for="remail">Email</label>
                     <span class="helper-text" data-error="Input Email" data-success="Ok"></span>
+                </div>
+
+                <div class="input-field">
+                    <input id="name" name="name" type="text" class="validate" required>
+                    <label for="name">Name</label>
+                    <span class="helper-text" data-error="Input name" data-success="Ok"></span>
                 </div>
 
                 <div class="input-field">
@@ -45,8 +59,12 @@
                     <label for="confirm">Password again </label>
                     <span class="helper-text" data-error="Input password"></span>
                 </div>
+
+                <p class="alert" id="error-reg-disp"></p>
+
+                <input type="hidden" name="_csrf" value="{{csrf}}">
                
-                <button class="btn btn-primary" type="submit">Submit</button>  
+                <button class="btn btn-primary" type="submit" id="register-btn">Submit</button>  
             </form>
             
         </div>
