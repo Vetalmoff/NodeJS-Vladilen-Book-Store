@@ -70,11 +70,11 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 
-const $searchButton = document.querySelector('#search')
-const $searchInput = document.querySelector('#autocomplete-input')
-const $container = document.querySelector('.container')
-
 M.Tabs.init(document.querySelectorAll('.tabs'))
+
+
+
+
 
 
 
@@ -94,3 +94,92 @@ if (rePas) {
         }
     })
 }
+
+
+const $searchButton = document.querySelector('#search')
+const $searchInput = document.querySelector('#autocomplete-input')
+const $container = document.querySelector('.container')
+
+if ($searchButton) {
+    $searchButton.addEventListener('click', (event) => {
+        const csrf = event.target.dataset.csrf
+
+        fetch(`/search?title=${$searchInput.value}`, {
+            method: 'GET',
+            headers: {
+            }
+        })
+          .then(res => res.json())
+          .then(ses => {
+              console.log(ses.books)
+              if (ses.books.length) {
+                  let htmlBooks = `
+                    <h2>We found these books for you : </h2>
+                    <div class="row">`
+                  if (ses.isAuthenticated) {
+                    htmlBooks += ses.books.map(book => 
+                        `<div class="col s12 m6 l4 xl4">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="${book.img}" alt="${book.title}">
+                            </div>
+                            <div class="card-content">
+                                    <div class="card-title">${book.title}</div>
+                                <p class="price">${book.price}</p>
+                            </div>
+                            <div class="card-action actions">
+                                <a href="/books/${book._id}" target="_blank">Open book</a>
+                                <a href="/books/${book._id}/edit?allow=true" >Edit</a>
+                                <form action="/cart/add" method="POST">
+                                    <input type="hidden" name="id" value="${book._id}">
+                                    <button type="submit" class="btn btn-primary">Buy</button>
+                                    <input type="hidden" name="_csrf" value="${csrf}">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                          `
+                      ).join('')
+                        $container.innerHTML = htmlBooks
+                  } else {
+                    htmlBooks += ses.books.map(book => 
+                        `<div class="col s12 m6 l4 xl4">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="${book.img}" alt="${book.title}">
+                            </div>
+                            <div class="card-content">
+                                    <div class="card-title">${book.title}</div>
+                                <p class="price">${book.price}</p>
+                            </div>
+                            <div class="card-action actions">
+                                <a href="/books/${book._id}" target="_blank">Open book</a>
+                            </div>
+                        </div>
+                    </div>
+                          `
+                      ).join('')
+                        $container.innerHTML = htmlBooks
+                  }
+                 
+              } else {
+                  $container.innerHTML = '<h1>No matches found</h1>'
+              }
+          })
+    })
+}   
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    let elems = document.querySelectorAll('.tooltipped')
+    let instances = M.Tooltip.init(elems)
+  })
+
+const $limit1 = document.querySelector('#limit1')
+const $limit2 = document.querySelector('#limit2')
+const $limit3 = document.querySelector('#limit3')
+
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.dropdown-trigger');
+    var instances = M.Dropdown.init(elems);
+  });

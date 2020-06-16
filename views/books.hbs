@@ -1,33 +1,51 @@
 
 
 <div class="row">
-    <div class="col s12">
-      <div class="row">
-          <div class="input-field col s12 m6 l4 xl3">
-            <i class="material-icons prefix">search</i>
-            <input type="text" id="autocomplete-input" class="autocomplete">
-            <label for="autocomplete-input">Search</label>
-          </div>
-          <div class="col s12 m6 l4 xl3">
-            <button id="search" class="btn red lighten-2">Search</button>
-          </div>
-          <div class="col s12 m12 l12 xl3">
-              <div class="view-buttons" >
-                <button class="btn red lighten-2" id="two"><i class="material-icons">view_stream</i></button>
-                <button class="btn red lighten-2" id="three"><i class="material-icons">view_module</i></button>
-                <button class="btn red lighten-2" id="four"><i class="material-icons">view_comfy</i></button>
-              </div>
-          </div>
-      </div>
-    </div>
+            <div class="input-field col s12 m4 l4 xl3">
+                <i class="material-icons prefix">search</i>
+                <input type="text" id="autocomplete-input" class="autocomplete">
+                <label for="autocomplete-input">Search</label>
+            </div>
+            <div class="col s12 m6 l4 xl3">
+                <button id="search" class="btn red lighten-2" data-csrf="{{csrf}}">Search</button>
+            </div>
+            <div class="col s12 m12 l12 xl3 view-buttons">
+                {{#if one}}
+                    <a class="btn red lighten-1 tooltipped" href="/books?page=1&limit=3&active=1&sort={{sort}}" id="limit1" data-position="top" data-tooltip="three books per page"><i class="material-icons">view_stream</i></a>
+                {{else}}
+                    <a class="btn red lighten-2 tooltipped" href="/books?page=1&limit=3&active=1&sort={{sort}}" id="limit1" data-position="top" data-tooltip="three books per page"><i class="material-icons">view_stream</i></a>
+                {{/if}}
+
+                {{#if two}}
+                    <a class="btn red lighten-1 tooltipped" href="/books?page=1&limit=6&active=2&sort={{sort}}" id="limit2" data-position="top" data-tooltip="six books per page"><i class="material-icons">view_module</i></a>
+                {{else}}
+                    <a class="btn red lighten-2 tooltipped" href="/books?page=1&limit=6&active=2&sort={{sort}}" id="limit2" data-position="top" data-tooltip="six books per page"><i class="material-icons">view_module</i></a>
+                {{/if}}
+
+                {{#if three}}
+                    <a class="btn red lighten-1 tooltipped" href="/books?page=1&limit=9&active=3&sort={{sort}}" id="limit3" data-position="top" data-tooltip="nine books per page"><i class="material-icons">view_comfy</i></a>
+                {{else}}
+                    <a class="btn red lighten-2 tooltipped" href="/books?page=1&limit=9&active=3&sort={{sort}}" id="limit3" data-position="top" data-tooltip="nine books per page"><i class="material-icons">view_comfy</i></a>
+                {{/if}}
+            </div>
+            <div class="col s12">
+                <a class='dropdown-trigger btn red lighten-2' href='#' data-target='dropdown1'>Sort</a>
+                <ul id='dropdown1' class='dropdown-content'>
+                    <li><a href="/books?page=1&limit={{limit}}&active={{active}}&sort=cheaperFirst">Cheaper first</a></li>
+                    <li><a href="/books?page=1&limit={{limit}}&active={{active}}&sort=expenciveFirst">Expencive first</a></li>
+                    <li><a href="/books?page=1&limit={{limit}}&active={{active}}&sort=byAlphabet">By alphabet</a></li>
+                </ul>
+            </div>
+            
 </div>
+
 
 <h1>Books :</h1>
 
 {{#if booksObj.length}}
     <div class="row">
     {{#each booksObj}}
-            <div class="col s12 m6 l4 xl3">
+            <div id="card" class="col s12 m6 l4 xl4">
                 <div class="card">
                     <div class="card-image">
                         <img src="{{img}}" alt="{{title}}">
@@ -54,26 +72,26 @@
     <div class="row">
         <div class="col s7">
             <ul class="pagination">
-                    <li class="waves-effect"><a href="/books?page={{booksObj.first.page}}&view={{booksObj.view.alias}}">first page</a></li>
+                    <li class="waves-effect"><a href="/books?page=1&limit={{limit}}&active={{active}}&sort={{sort}}">first page</a></li>
                     
-                    {{#if booksObj.previous}}
-                        <li class="waves-effect"><a href="/books?page={{booksObj.previous.page}}&view={{booksObj.view.alias}}"><i class="material-icons">chevron_left</i></a></li>
+                    {{#if previous}}
+                        <li class="waves-effect"><a href="/books?page={{previous.page}}&limit={{previous.limit}}&active={{active}}&sort={{sort}}"><i class="material-icons">chevron_left</i></a></li>
                     {{else}}
                         <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
                     {{/if}}
 
-                    <li class="active"><a href="#!">{{booksObj.page}}</a></li>
+                    <li class="active"><a href="#!">{{page}}</a></li>
 
-                    {{#if booksObj.next}}
-                        <li class="waves-effect"><a href="/books?page={{booksObj.next.page}}&view={{booksObj.view.alias}}"><i class="material-icons">chevron_right</i></a></li>
+                    {{#if next}}
+                        <li class="waves-effect"><a href="/books?page={{next.page}}&limit={{next.limit}}&active={{active}}&sort={{sort}}"><i class="material-icons">chevron_right</i></a></li>
                     {{else}}
                         <li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
                     {{/if}}
                         
-                    <li class="waves-effect"><a href="/books?page={{booksObj.last.page}}&view={{booksObj.view.alias}}" data-page="{{booksObj.last.page}}" id="lastPage">last page :  {{booksObj.last.page}}</a></li>
+                    <li class="waves-effect"><a href="/books?page={{lastPage}}&limit={{limit}}&active={{active}}&sort={{sort}}" data-page="{{booksObj.last.page}}" id="lastPage">last page :  {{lastPage}}</a></li>
             </ul>
         </div>
-        <div class="col s5">
+        {{!-- <div class="col s5">
             <form action="#!">
                 <div class="row">
                     <div class="input-field col s6">
@@ -85,7 +103,7 @@
                     </div>
                 </div>
             </form>
-        </div>
+        </div> --}}
         
   </div>
 {{else}}

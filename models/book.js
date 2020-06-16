@@ -23,4 +23,5 @@ book.method('toClient', function () {
     return book
 })
 
+
 module.exports = model('Book', book)

@@ -7,7 +7,7 @@ const auth = require('../middleware/auth')
 router.get('/', auth, (req, res) => {
     res.render('add', {
         title: 'Add book',
-        isAdd: true
+        isAdd: true,
     })
 })
 
@@ -24,7 +24,7 @@ router.post('/', auth, async (req, res) => {
 
     try {
         await book.save()
-        res.redirect('/books')
+        res.redirect('/books?page=1&limit=3&active=1&sort=cheaperFirst')
     } catch (e) {
         console.log(e)
     }
@@ -33,3 +33,4 @@ router.post('/', auth, async (req, res) => {
 
 
 module.exports = router
+
