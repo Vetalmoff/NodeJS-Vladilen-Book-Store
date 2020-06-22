@@ -83,3 +83,7 @@
     color: red;
 }
 
+.avatar {
+    max-width: 300px;
+    height: auto
+}

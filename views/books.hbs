@@ -40,12 +40,13 @@
 </div>
 
 
-<h1>Books :</h1>
+
 
 {{#if booksObj.length}}
+<h3>Books are sorted : {{sort}}</h3>
     <div class="row">
     {{#each booksObj}}
-            <div id="card" class="col s12 m6 l4 xl4">
+            <div id="card" class="col s12 m6 l4 xl3">
                 <div class="card">
                     <div class="card-image">
                         <img src="{{img}}" alt="{{title}}">
@@ -53,11 +54,16 @@
                     <div class="card-content">
                             <div class="card-title">{{title}}</div>
                         <p class="price">{{price}}</p>
+                        {{!-- <p>{{userId._id}} {{@root.userId}}</p> --}}
                     </div>
                     <div class="card-action actions">
                         <a href="/books/{{id}}" target="_blank">Open book</a>
                         {{#if @root.isAuth}}
+
+                        {{#ifeq userId._id @root.userId}}
                         <a href="/books/{{id}}/edit?allow=true" >Edit</a>
+                        {{/ifeq}}
+
                         <form action="/cart/add" method="POST">
                             <input type="hidden" name="id" value="{{id}}">
                             <button type="submit" class="btn btn-primary">Buy</button>
@@ -107,5 +113,5 @@
         
   </div>
 {{else}}
-    <p>There are no books</p>
+    <h3>There are no books</h3>
 {{/if}}

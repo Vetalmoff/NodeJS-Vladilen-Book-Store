@@ -1,20 +1,24 @@
 <h1>Add new book</h1>
 
-<form action="/add" method="POST">
+{{#if error}}
+    <p class="alert">{{error}}</p>
+{{/if}}
+
+<form action="/add" method="POST" novalidate>
     <div class="input-field">
-        <input id="title" name="title" type="text" class="validate" required min="10" max="100">
+        <input id="title" name="title" type="text" class="validate" required min="10" max="100" value="{{data.title}}">
         <label for="title">Title</label>
-        <span class="helper-text" data-error="Input name" data-success="right"></span>
+        <span class="helper-text" data-error="Input title" data-success="right"></span>
     </div>
 
     <div class="input-field col s6">
-        <input id="price" name="price" type="number" class="validate" required min="1">
+        <input id="price" name="price" type="number" class="validate" required min="1" value="{{data.price}}">
         <label for="price">Price</label>
         <span class="helper-text" data-error="Input price" data-success="right"></span>
     </div>
 
     <div class="input-field col s6">
-        <input id="img" name="img" type="text" class="validate" required>
+        <input id="img" name="img" type="text" class="validate" required value="{{data.img}}">
         <label for="img">Image url</label>
         <span class="helper-text" data-error="Input img  url" data-success="right"></span>
     </div>

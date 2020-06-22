@@ -1,5 +1,9 @@
 <h1>Edit {{book.title}}</h1>
 
+{{#if error}}
+    <p class="alert">{{error}}</p>
+{{/if}}
+
 <form action="/books/edit" method="POST" class="book-form">
     <div class="input-field">
         <input id="title" name="title" type="text" class="validate" required value="{{book.title}}" min="10" max="100">
