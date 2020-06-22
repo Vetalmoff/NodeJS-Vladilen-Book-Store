@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
 const mongoose = require('mongoose')
+const helmet = require('helmet')
 const csrf = require('csurf')
 const flash = require('connect-flash')
 const exphbs = require('express-handlebars')
@@ -15,6 +16,7 @@ const searchRoutes = require('./routes/search')
 const authRoutes = require('./routes/auth')
 const profileRoutes = require('./routes/profile')
 const Handlebars = require('handlebars')
+const compression = require('compression')
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 const varMiddleware = require('./middleware/variables')
 const userMiddleware = require('./middleware/user')
@@ -56,10 +58,13 @@ app.use(session({
     store
 }))
 
+app.use(helmet())
+
 app.use(fileMiddleware.single('avatar'))
 
 app.use(csrf())
 app.use(flash())
+app.use(compression())
 
 app.use(varMiddleware)
 app.use(userMiddleware)

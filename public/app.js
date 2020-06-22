@@ -83,17 +83,17 @@ const rePas = document.querySelector('#confirm')
 const errRegDisp = document.querySelector('#error-reg-disp')
 const regBtn = document.querySelector('#register-btn')
 
-// if (rePas) {
-//     rePas.addEventListener('blur', () => {
-//         if (pas.value !== rePas.value) {
-//             errRegDisp.innerHTML = "passwords don't match"
-//             regBtn.disabled = true
-//         } else {
-//             errRegDisp.innerHTML = ""
-//             regBtn.disabled = false
-//         }
-//     })
-// }
+if (rePas) {
+    rePas.addEventListener('blur', () => {
+        if (pas.value !== rePas.value) {
+            errRegDisp.innerHTML = "passwords don't match"
+            regBtn.disabled = true
+        } else {
+            errRegDisp.innerHTML = ""
+            regBtn.disabled = false
+        }
+    })
+}
 
 
 const $searchButton = document.querySelector('#search')
