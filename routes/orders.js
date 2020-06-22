@@ -2,6 +2,13 @@ const {Router} = require('express')
 const router = Router()
 const Order = require('../models/order')
 const auth = require('../middleware/auth')
+const sgMail = require('@sendgrid/mail')
+const keys = require('../keys/index')
+
+const orderEmail = require('../emails/order')
+
+
+sgMail.setApiKey(keys.SEND_GRID_API_KEY)
 
 
 router.get('/', auth, async (req, res) => {
@@ -34,6 +41,8 @@ router.post('/', auth, async (req, res) => {
             .populate('cart.items.bookId')
             .execPopulate()
 
+            console.log('Userpopulate = ', user)
+
         const books = user.cart.items.map(i => ({
             count: i.count,
             book: {...i.bookId._doc}
@@ -49,6 +58,8 @@ router.post('/', auth, async (req, res) => {
 
         await order.save()
         await req.user.clearCart()
+        //await sgMail.send(orderEmail(user.email))
+
 
         res.redirect('/orders')
     } catch(e) {
